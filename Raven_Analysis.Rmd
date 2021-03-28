@@ -1,0 +1,19 @@
+---
+title: "Raven Analysis"
+author: "Nils Dosaj Mikkelsen"
+date: "27/03/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load data
+
+```{r}
+data = read.csv(file = "data.csv", header = T, sep = ",") 
+head(data)
+tail(data)
+```
+
