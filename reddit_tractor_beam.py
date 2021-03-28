@@ -28,9 +28,9 @@ def build_reddit_data_frame():
                              "comment", "comment_time", "comment_karma"]
 
     df = pd.DataFrame(columns=column_names)
-    n = 10
+
     for s in subreddits:
-        posts = reddit.subreddit(s).hot(limit=n) # grab top n posts
+        posts = reddit.subreddit(s).hot(limit=1) # grab top n posts
         for p in posts:
             submission = reddit.submission(id=p.id)  # get comments
             submission.comments.replace_more(limit=0)  # removes all more comments/Continue buttons
@@ -46,10 +46,12 @@ def build_reddit_data_frame():
                          "comment_time": c.created_utc,
                          "comment_karma": c.score}
                 df = df.append(entry, ignore_index=True)
+
     print("df shape: ", df.shape)
     # df.to_csv("data.csv")
     global test_df
     test_df = df
+    return df
 
 
 def main():

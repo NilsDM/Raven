@@ -1,9 +1,13 @@
 
-def analyse(data):
-    pass
+
+
+def analyse(reddit, stocks):
+    print(reddit)
+    print(stocks)
 
 
 def main():
+
     pass
 
 
