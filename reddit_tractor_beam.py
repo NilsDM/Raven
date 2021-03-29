@@ -15,10 +15,10 @@ def build_reddit_data_frame():
                          user_agent=cred.c[2])
 
     # subreddits to scrape
-    subreddits = ["Investing", "Pennystocks", "StockMarket", "Stocks",
-                  "Crypto", "Wallstreetbets", "GME", "EconMonitor",
-                  "SecurityAnalysis", "Accounting", "Finance", "Options",
-                  "algotrading"]
+    subreddits = ["Investing"]#, "Pennystocks", "StockMarket", "Stocks",
+                  #"Crypto", "Wallstreetbets", "GME", "EconMonitor",
+                  #"SecurityAnalysis", "Accounting", "Finance", "Options",
+                  #"algotrading"]
 
     # attributes from post, author, comments
     column_names = ["subreddit",
