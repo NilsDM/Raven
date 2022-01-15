@@ -15,22 +15,33 @@ def build_reddit_data_frame():
                          user_agent=cred.c[2])
 
     # subreddits to scrape
-    subreddits = ["Investing"]#, "Pennystocks", "StockMarket", "Stocks",
-                  #"Crypto", "Wallstreetbets", "GME", "EconMonitor",
-                  #"SecurityAnalysis", "Accounting", "Finance", "Options",
-                  #"algotrading"]
+    subreddits = ["CryptoTechnology",
+                  "CryptoCurrency",
+                  "CryptoMarkets",
+                  "algotrading",
+                  "altcoin"]
+
+    #, "Pennystocks", "StockMarket", "Stocks",
+    #"Crypto", "Wallstreetbets", "GME", "EconMonitor",
+    #"SecurityAnalysis", "Accounting", "Finance", "Options", "algotrading"]
 
     # attributes from post, author, comments
+
     column_names = ["subreddit",
-                    "post_name", "author_name",
-                    "time_created", "num_comments",
-                    "karma", "karma_ratio"
-                             "comment", "comment_time", "comment_karma"]
+                    "post_name",
+                    "author_name",
+                    "time_created",
+                    "num_comments",
+                    "karma",
+                    "karma_ratio",
+                    "comment",
+                    "comment_time",
+                    "comment_karma"]
 
     df = pd.DataFrame(columns=column_names)
 
     for s in subreddits:
-        posts = reddit.subreddit(s).hot(limit=1) # grab top n posts
+        posts = reddit.subreddit(s).hot(limit=25) # grab top n posts
         for p in posts:
             submission = reddit.submission(id=p.id)  # get comments
             submission.comments.replace_more(limit=0)  # removes all more comments/Continue buttons
@@ -48,7 +59,7 @@ def build_reddit_data_frame():
                 df = df.append(entry, ignore_index=True)
 
     print("df shape: ", df.shape)
-    # df.to_csv("data.csv")
+    df.to_csv("data.csv")
     global test_df
     test_df = df
     return df

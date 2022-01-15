@@ -16,19 +16,17 @@ def count_match(s, symbol_count):
 
 
 def analyse(df, stocks):
-    # column 9 contains comment body
     i = 0
     symbols = list(stocks.keys())
     symbol_count = {}
     while i < len(df): # for every row in data frame
-        comment = df.iloc[i][9]
+        comment = df.iloc[i][9] # column 9 contains comment body
         for s in symbols: # for every stock name
             if symbol_cleaner(s):
                 pattern = re.compile(r'{}'.format(s))
                 matches = pattern.finditer(comment)
                 for match in matches: # For every match found (do processing here)
                     symbol_count = count_match(s, symbol_count)
-        #print(comment)
         i += 1
     #print(stocks[0])
     #print(symbol_count)

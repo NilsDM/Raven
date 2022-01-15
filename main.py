@@ -6,8 +6,8 @@ import comment_blender as cb
 
 def main():
     reddit_data = rtb.build_reddit_data_frame() # Scrape reddit
-    stock_data = stb.stock_name_parser()
-    comment_data = cb.analyse(reddit_data, stock_data)
+    # stock_data = stb.stock_name_parser()
+    # comment_data = cb.analyse(reddit_data, stock_data)
 
     print("okay")
 

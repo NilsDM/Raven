@@ -12,8 +12,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Load data
 
 ```{r}
-data = read.csv(file = "data.csv", header = T, sep = ",") 
+data = read.csv(file = "data.csv", header = T, sep = ",", encoding = "UTF-8") 
 head(data)
 tail(data)
+```
+
+
+
+```{r}
+data <- read.csv(file = "data.csv", header = TRUE, sep = ",")
 ```
 
