@@ -9,17 +9,38 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Load data
+## Load Libraries
 
 ```{r}
-data = read.csv(file = "data.csv", header = T, sep = ",", encoding = "UTF-8") 
-head(data)
-tail(data)
+library(quanteda) 
+library(tidyverse)
+```
+
+## Load Data
+
+```{r}
+data = read.csv(file = "data_dumps/data_01-14-2022.csv", header = T, sep = ",", encoding = "UTF-8") 
+# head(data)
+# tail(data)
 ```
 
 
+```{r}
+comment_corpus <- corpus(data, text_field = "comment")
+summary(comment_corpus)
+```
 
 ```{r}
-data <- read.csv(file = "data.csv", header = TRUE, sep = ",")
+comment_token <- tokens(comment_corpus, remove_punct = TRUE) 
+comment_token
+# Extract text with as.character(comment_corpus)[2]
+```
+
+
+```{r}
+my_dfm <- dfm(comment_token, remove = stopwords("english"))
+```
+```{r}
+a <- topfeatures(my_dfm,20)
 ```
 
