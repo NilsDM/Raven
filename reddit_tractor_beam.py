@@ -48,23 +48,28 @@ def build_reddit_data_frame():
             if p.stickied == False:
                 submission = reddit.submission(id=p.id)  # get comments
                 submission.comments.replace_more(limit=0)  # removes all more comments/Continue buttons
-                for c in submission.comments.list():  # for every comment in post
-                    entry = {"subreddit": s,  # data frame row
-                             "post_name": submission.title,
-                             "author_name": submission.author.name,
-                             "time_created": submission.created_utc,
-                             "num_comments": submission.num_comments,
-                             "karma": submission.score,
-                             "karma_ratio": submission.upvote_ratio,
-                             "comment": c.body,
-                             "comment_time": c.created_utc,
-                             "comment_karma": c.score}
-                    df = df.append(entry, ignore_index=True)
+                for c in submission.comments.list():  # for every comment in post 
+                    try: # Exception for deleted comments
+                        entry = {"subreddit": s,  # data frame row
+                                 "post_name": submission.title,
+                                 "author_name": submission.author.name,
+                                 "time_created": submission.created_utc,
+                                 "num_comments": submission.num_comments,
+                                 "karma": submission.score,
+                                 "karma_ratio": submission.upvote_ratio,
+                                 "comment": c.body,
+                                 "comment_time": c.created_utc,
+                                 "comment_karma": c.score}
+                        # df = df.concat(entry, ignore_index=True)   
+                        df.loc[len(df)]  = entry
+                    except AttributeError:  
+                        continue
+
 
     # Output
     print("df shape: ", df.shape)
     today_date = time.strftime("%m-%d-%Y")
-    base_path = r'C:\Users\nilsm\Dropbox\Projects\Raven\data_dumps\\'
+    base_path = r'/mnt/c/Users/nilsm/Dropbox/Projects/Raven/data_dumps/'
     extension = ".csv"
     full_path = base_path + "data_" + today_date + extension
     df.to_csv(full_path)
