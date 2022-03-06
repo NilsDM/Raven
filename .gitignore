@@ -131,4 +131,3 @@ dmypy.json
 
 # Credentials
 cred.py
-api_keys.cfg
