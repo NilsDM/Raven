@@ -14,7 +14,7 @@ def cmc_pull():
     # TODO: make this info private? 
     parameters = {
         'start':'1',
-        'limit':'5000',
+        'limit':'200',
         'convert':'USD'
         }
 
@@ -30,7 +30,7 @@ def cmc_pull():
 
     try:
         response = session.get(url, params=parameters)
-
+        
         data = response.json()
 
         # TODO: timestamp?
@@ -44,9 +44,6 @@ def cmc_pull():
 
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)   
-
-    global raw
-    raw = data
 
     return data
 
