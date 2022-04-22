@@ -1,2 +1,2 @@
 # Raven
-Social network data scraper, analyzer and visualizer  
+Social media data scraper, analyzer and visualizer for cryptocurrency pricing  
